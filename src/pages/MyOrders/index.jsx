@@ -1,7 +1,9 @@
+import Layout from "../../components/Layout";
+
 function MyOrders() {
   return (
     <>
-      <div className="bg-orange-800">MyOrders</div>
+      <Layout>MyOrders</Layout>
     </>
   );
 }
