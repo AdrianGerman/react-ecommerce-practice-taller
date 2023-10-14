@@ -13,6 +13,7 @@ const Card = (data) => {
           {data.data.category.name}
         </span>
         <img
+          onClick={() => context.openProductDetail()}
           className="w-full h-full object-cover rounded-lg"
           src={data.data.images[0]}
           alt={data.data.title}
