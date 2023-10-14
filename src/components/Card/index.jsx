@@ -16,7 +16,7 @@ const Card = (data) => {
           alt={data.data.title}
         />
         <div
-          className="absolute top-0 right-0 flex justify-center items-center bg-slate-300 w-6 h-6 rounded-full text-slate-700 m-2 p-2"
+          className="absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 rounded-full text-slate-700 m-2 p-2"
           onClick={() => context.setCount(context.count + 1)}
         >
           +
