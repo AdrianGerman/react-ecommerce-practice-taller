@@ -11,6 +11,12 @@ const Card = (data) => {
     context.setProductToShow(productDetail);
   };
 
+  const addProductsToCart = (productData) => {
+    context.setCount(context.count + 1);
+    context.setCartProducts([...context.cartProducts, productData]);
+    console.log(context.cartProducts);
+  };
+
   return (
     // bg-slate-800
     <div
@@ -29,14 +35,14 @@ const Card = (data) => {
         />
         <div
           className="absolute top-0 right-0 flex justify-center items-center rounded-full m-1"
-          onClick={() => context.setCount(context.count + 1)}
+          onClick={() => addProductsToCart(data.data)}
         >
           <PlusCircleIcon className="h-6 w-6 text-white cursor-pointer" />
         </div>
       </figure>
       <p className="flex justify-between">
         <span className="text-sm font-light m-1">{data.data.title}</span>
-        <span className="text-lg font-medium">{data.data.price}</span>
+        <span className="text-lg font-medium">${data.data.price}</span>
       </p>
     </div>
   );

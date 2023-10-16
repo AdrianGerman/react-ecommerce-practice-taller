@@ -15,6 +15,9 @@ export const ShoppingCartProvider = ({ children }) => {
   // product detail ~ Show product
   const [productToShow, setProductToShow] = useState({});
 
+  // Shopping Cart ~ Add product to cart
+  const [cartProducts, setCartProducts] = useState([]);
+
   // console.log(isProductDetailOpen);
 
   return (
@@ -27,6 +30,8 @@ export const ShoppingCartProvider = ({ children }) => {
         isProductDetailOpen,
         productToShow,
         setProductToShow,
+        cartProducts,
+        setCartProducts,
       }}
     >
       {children}
