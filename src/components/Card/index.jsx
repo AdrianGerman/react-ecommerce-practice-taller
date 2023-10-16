@@ -9,33 +9,38 @@ const Card = (data) => {
   const showProduct = (productDetail) => {
     context.openProductDetail();
     context.setProductToShow(productDetail);
+    context.closeCheckoutSideMenu();
   };
 
-  const addProductsToCart = (productData) => {
+  const addProductsToCart = (event, productData) => {
+    event.stopPropagation();
     context.setCount(context.count + 1);
     context.setCartProducts([...context.cartProducts, productData]);
-    console.log(context.cartProducts);
+    context.closeProductDetail();
+    context.openCheckoutSideMenu();
+
+    // console.log(context.cartProducts);
   };
 
   return (
     // bg-slate-800
     <div
       className="cursor-pointer w-56 h-60 rounded-lg"
-      onClick={() => showProduct(data.data)}
+      // onClick={() => showProduct(data.data)}
     >
       <figure className="relative mb-2 w-full h-4/5">
         <span className="absolute bottom-0 left-0 bg-white/60 rounded-lg text-black text-xs m-2 px-3 py-0.5">
           {data.data.category.name}
         </span>
         <img
-          onClick={() => context.openProductDetail()}
+          onClick={() => showProduct(data.data)}
           className="w-full h-full object-cover rounded-lg"
           src={data.data.images[0]}
           alt={data.data.title}
         />
         <div
           className="absolute top-0 right-0 flex justify-center items-center rounded-full m-1"
-          onClick={() => addProductsToCart(data.data)}
+          onClick={(event) => addProductsToCart(event, data.data)}
         >
           <PlusCircleIcon className="h-6 w-6 text-white cursor-pointer" />
         </div>
