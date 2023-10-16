@@ -15,7 +15,7 @@ export const ShoppingCartProvider = ({ children }) => {
   // product detail ~ Show product
   const [productToShow, setProductToShow] = useState({});
 
-  console.log(isProductDetailOpen);
+  // console.log(isProductDetailOpen);
 
   return (
     <ShoppingCartContext.Provider
