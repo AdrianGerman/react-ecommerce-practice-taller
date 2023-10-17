@@ -16,8 +16,10 @@ const OrderCard = (props) => {
         <p className="text-sm font-light">{title}</p>
       </div>
       <div className="flex items-center gap-2">
-        <p className="text-lg font-medium">{price}</p>
-        <XMarkIcon className="h6 w-6 text-black cursor-pointer" />
+        <p className="text-lg font-medium">${price}</p>
+        {/* <div onClick={()}> */}
+        <XMarkIcon className="h-6 w-6 text-red-500 cursor-pointer" />
+        {/* </div> */}
       </div>
     </div>
   );

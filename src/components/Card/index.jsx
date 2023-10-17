@@ -1,4 +1,4 @@
-import { PlusCircleIcon } from "@heroicons/react/24/solid";
+import { CheckCircleIcon, PlusCircleIcon } from "@heroicons/react/24/solid";
 
 import { useContext } from "react";
 import { ShoppingCartContext } from "../../context";
@@ -18,8 +18,29 @@ const Card = (data) => {
     context.setCartProducts([...context.cartProducts, productData]);
     context.closeProductDetail();
     context.openCheckoutSideMenu();
-
     // console.log(context.cartProducts);
+  };
+
+  const renderIcon = (id) => {
+    const isInCart =
+      context.cartProducts.filter((product) => product.id === id).length > 0;
+
+    if (isInCart) {
+      return (
+        <div className="absolute top-0 right-0 flex justify-center items-center rounded-full m-1">
+          <CheckCircleIcon className="h-7 w-7 text-green-400 cursor-pointer" />
+        </div>
+      );
+    } else {
+      return (
+        <div
+          className="absolute top-0 right-0 flex justify-center items-center rounded-full m-1"
+          onClick={(event) => addProductsToCart(event, data.data)}
+        >
+          <PlusCircleIcon className="h-7 w-7 text-white cursor-pointer" />
+        </div>
+      );
+    }
   };
 
   return (
@@ -38,12 +59,7 @@ const Card = (data) => {
           src={data.data.images[0]}
           alt={data.data.title}
         />
-        <div
-          className="absolute top-0 right-0 flex justify-center items-center rounded-full m-1"
-          onClick={(event) => addProductsToCart(event, data.data)}
-        >
-          <PlusCircleIcon className="h-6 w-6 text-white cursor-pointer" />
-        </div>
+        {renderIcon(data.data.id)}
       </figure>
       <p className="flex justify-between">
         <span className="text-sm font-light m-1">{data.data.title}</span>
