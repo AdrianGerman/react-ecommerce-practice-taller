@@ -14,7 +14,7 @@ function MyOrders() {
           <Link to="/my-order" className="absolute right-0">
             <ChevronRightIcon className="h-6 w-6 text-white cursor-pointer" />
           </Link>
-          <h1>My Orders</h1>
+          <h1 className="font-medium text-xl">My Orders</h1>
         </div>
         {context.order.map((order, index) => (
           <Link key={index} to={`/my-orders/${index}`}>
