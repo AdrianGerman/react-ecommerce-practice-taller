@@ -10,6 +10,20 @@ import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 function Home() {
   const context = useContext(ShoppingCartContext);
 
+  const renderView = () => {
+    if (context.searchByTitle?.length > 0) {
+      if (context.filteredItems?.length > 0) {
+        return context.filteredItems?.map((item) => (
+          <Card key={item.id} data={item} />
+        ));
+      } else {
+        return <div>No se encontraron resultados :(</div>;
+      }
+    } else {
+      return context.items?.map((item) => <Card key={item.id} data={item} />);
+    }
+  };
+
   return (
     <Layout>
       <div className="flex w-80 items-center relative justify-center mb-6">
@@ -25,9 +39,7 @@ function Home() {
         />
       </div>
       <div className="grid gap-4 grid-cols-4 w-full max-w-screen-lg">
-        {context.items?.map((item) => (
-          <Card key={item.id} data={item} />
-        ))}
+        {renderView()}
       </div>
       <ProductDetail />
     </Layout>
