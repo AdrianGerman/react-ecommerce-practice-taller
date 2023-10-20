@@ -18,7 +18,7 @@ function MyOrder() {
           <Link to="/my-orders" className="absolute left-0">
             <ChevronLeftIcon className="h-6 w-6 text-white cursor-pointer" />
           </Link>
-          <h1>My Order</h1>
+          <h1>Pedido realizado</h1>
         </div>
         <div className="flex flex-col w-80">
           {context.order?.[index]?.products.map((product) => (
