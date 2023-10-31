@@ -12,22 +12,36 @@ function SingIn() {
     context.setSignOut(false);
   };
 
+  //Account
+  const account = localStorage.getItem("account");
+  const parsedAccount = JSON.parse(account);
+
+  //Has an account
+  const noAccountInLocalStorage = parsedAccount
+    ? Object.keys(parsedAccount).length === 0
+    : true;
+  const noAccountInLocalState = context.account
+    ? Object.keys(context.account).length === 0
+    : true;
+  const hasUserAnAccount = !noAccountInLocalStorage && !noAccountInLocalState;
+
   return (
     <Layout>
       <h1 className="font-medium text-xl text-center mb-6 w-80">Bienvenido!</h1>
       <div className="flex flex-col w-80">
         <p>
           <span className="font-light text-sm">Correo: </span>
-          <span>adrian.german1019@gmail.com</span>
+          <span>{parsedAccount?.email}</span>
         </p>
         <p>
           <span className="font-light text-sm">Contraseña: </span>
-          <span>********</span>
+          <span>{parsedAccount?.password}</span>
         </p>
         <Link to="/">
           <button
             onClick={() => handleLogIn()}
-            className="bg-slate-500 disabled:bg-slate-500/40 text-white w-full rounded-lg py-3 mt-4 mb-2"
+            disabled={!hasUserAnAccount}
+            className="bg-slate-500 disabled:bg-slate-500/40 text-white w-full rounded-lg py-3 mt-4 mb-2 cursor-pointer"
           >
             Iniciar sesión
           </button>
@@ -40,7 +54,10 @@ function SingIn() {
             ¿Olvidaste tu contraseña?
           </a>
         </div>
-        <button className="border border-bg-slate-500 disabled:text-black/40 disabled:border-black/40 rounded-lg mt-6 py-3">
+        <button
+          disabled={hasUserAnAccount}
+          className="border border-bg-slate-500 disabled:text-black/40 disabled:border-black/40 rounded-lg mt-6 py-3"
+        >
           Registrarse
         </button>
       </div>
