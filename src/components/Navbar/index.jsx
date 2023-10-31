@@ -7,10 +7,69 @@ const Navbar = () => {
   const context = useContext(ShoppingCartContext);
   const activeStyle = "bg-slate-700 rounded-lg p-1";
 
+  //sign Out
+  const signOut = localStorage.getItem("sign-out");
+  const parsedSignOut = JSON.parse(signOut);
+  const isUserSignOut = context.signOut || parsedSignOut;
+
   const handleSignOut = () => {
     const stringifiedSignOut = JSON.stringify(true);
     localStorage.setItem("sign-out", stringifiedSignOut);
     context.setSignOut(true);
+  };
+
+  const renderView = () => {
+    if (isUserSignOut) {
+      return (
+        <li>
+          <NavLink
+            to="/sign-in"
+            onClick={() => handleSignOut()}
+            className={({ isActive }) => (isActive ? activeStyle : undefined)}
+          >
+            Iniciar sesión
+          </NavLink>
+        </li>
+      );
+    } else {
+      return (
+        <>
+          <li className="text-gray-400 text-sm">Bienvenid@ Adrian German</li>
+          <li>
+            <NavLink
+              to="/my-orders"
+              className={({ isActive }) => (isActive ? activeStyle : undefined)}
+            >
+              Mis pedidos
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/my-account"
+              className={({ isActive }) => (isActive ? activeStyle : undefined)}
+            >
+              Mi cuenta
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/sign-in"
+              onClick={() => handleSignOut()}
+              className={({ isActive }) => (isActive ? activeStyle : undefined)}
+            >
+              Cerrar sesión
+            </NavLink>
+          </li>
+          <li className="flex items-center">
+            <ShoppingCartIcon
+              onClick={context.openCheckoutSideMenu}
+              className="h-6 w-6 cursor-pointer text-gray-300"
+            />
+            <div>{context.cartProducts.length}</div>
+          </li>
+        </>
+      );
+    }
   };
 
   return (
@@ -73,51 +132,9 @@ const Navbar = () => {
             Otros
           </NavLink>
         </li>
-        <li>
-          <NavLink
-            to="/sign-in"
-            onClick={() => handleSignOut()}
-            className={({ isActive }) => (isActive ? activeStyle : undefined)}
-          >
-            Sign out
-          </NavLink>
-        </li>
       </ul>
 
-      <ul className="flex items-center gap-3 text-base">
-        <li className="text-gray-400 text-sm">Bienvenid@ Adrian German</li>
-        <li>
-          <NavLink
-            to="/my-orders"
-            className={({ isActive }) => (isActive ? activeStyle : undefined)}
-          >
-            Mis pedidos
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/my-account"
-            className={({ isActive }) => (isActive ? activeStyle : undefined)}
-          >
-            Mi cuenta
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/sign-in"
-            className={({ isActive }) => (isActive ? activeStyle : undefined)}
-          >
-            Iniciar sesión
-          </NavLink>
-        </li>
-        <li className="flex items-center">
-          <ShoppingCartIcon
-            onClick={context.openCheckoutSideMenu}
-            className="h-6 w-6 cursor-pointer text-gray-300"
-          />
-          <div>{context.cartProducts.length}</div>
-        </li>
-      </ul>
+      <ul className="flex items-center gap-3 text-base">{renderView()}</ul>
     </nav>
   );
 };
