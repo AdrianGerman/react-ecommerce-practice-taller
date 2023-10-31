@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import Layout from "../../components/Layout";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { ShoppingCartContext } from "../../context";
 
 function SingIn() {
@@ -11,6 +11,8 @@ function SingIn() {
     localStorage.setItem("sign-out", stringifiedSignOut);
     context.setSignOut(false);
   };
+
+  const [view, setView] = useState("user-info");
 
   //Account
   const account = localStorage.getItem("account");
@@ -23,11 +25,10 @@ function SingIn() {
   const noAccountInLocalState = context.account
     ? Object.keys(context.account).length === 0
     : true;
-  const hasUserAnAccount = !noAccountInLocalStorage && !noAccountInLocalState;
+  const hasUserAnAccount = !noAccountInLocalStorage || !noAccountInLocalState;
 
-  return (
-    <Layout>
-      <h1 className="font-medium text-xl text-center mb-6 w-80">Bienvenido!</h1>
+  const renderLogIn = () => {
+    return (
       <div className="flex flex-col w-80">
         <p>
           <span className="font-light text-sm">Correo: </span>
@@ -39,9 +40,9 @@ function SingIn() {
         </p>
         <Link to="/">
           <button
-            onClick={() => handleLogIn()}
             disabled={!hasUserAnAccount}
             className="bg-slate-500 disabled:bg-slate-500/40 text-white w-full rounded-lg py-3 mt-4 mb-2 cursor-pointer"
+            onClick={() => handleLogIn()}
           >
             Iniciar sesión
           </button>
@@ -57,10 +58,24 @@ function SingIn() {
         <button
           disabled={hasUserAnAccount}
           className="border border-bg-slate-500 disabled:text-black/40 disabled:border-black/40 rounded-lg mt-6 py-3"
+          onClick={() => setView("create-user-info")}
         >
           Registrarse
         </button>
       </div>
+    );
+  };
+
+  const renderCreateUserInfo = () => {
+    // TODO: Create render view
+  };
+  const renderView = () =>
+    view === "create-user-info" ? renderCreateUserInfo() : renderLogIn();
+
+  return (
+    <Layout>
+      <h1 className="font-medium text-xl text-center mb-6 w-80">Bienvenido!</h1>
+      {renderView()}
     </Layout>
   );
 }
