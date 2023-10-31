@@ -1,5 +1,4 @@
 import { ShoppingCartIcon } from "@heroicons/react/24/solid";
-
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { ShoppingCartContext } from "../../context";
@@ -7,6 +6,13 @@ import { ShoppingCartContext } from "../../context";
 const Navbar = () => {
   const context = useContext(ShoppingCartContext);
   const activeStyle = "bg-slate-700 rounded-lg p-1";
+
+  const handleSignOut = () => {
+    const stringifiedSignOut = JSON.stringify(true);
+    localStorage.setItem("sign-out", stringifiedSignOut);
+    context.setSignOut(true);
+  };
+
   return (
     <nav className="flex justify-between items-center fixed z-10 top-0 w-full py-5 px-8 text-sm font-light bg-black-font-divs rounded-b-2xl">
       <ul className="flex items-center gap-3 text-base">
@@ -65,6 +71,15 @@ const Navbar = () => {
             className={({ isActive }) => (isActive ? activeStyle : undefined)}
           >
             Otros
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/sign-in"
+            onClick={() => handleSignOut()}
+            className={({ isActive }) => (isActive ? activeStyle : undefined)}
+          >
+            Sign out
           </NavLink>
         </li>
       </ul>
