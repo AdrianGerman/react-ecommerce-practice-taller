@@ -40,7 +40,7 @@ function SingIn() {
         </p>
         <Link to="/">
           <button
-            disabled={!hasUserAnAccount}
+            disabled={hasUserAnAccount}
             className="bg-slate-500 disabled:bg-slate-500/40 text-white w-full rounded-lg py-3 mt-4 mb-2 cursor-pointer"
             onClick={() => handleLogIn()}
           >
