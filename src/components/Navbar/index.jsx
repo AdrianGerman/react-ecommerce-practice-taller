@@ -1,7 +1,8 @@
-import { ShoppingCartIcon } from "@heroicons/react/24/solid";
+// import { ShoppingCartIcon } from "@heroicons/react/24/solid";
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { ShoppingCartContext } from "../../context";
+import ShoppingCart from "../ShoppingCart";
 
 const Navbar = () => {
   const context = useContext(ShoppingCartContext);
@@ -60,13 +61,13 @@ const Navbar = () => {
               Cerrar sesión
             </NavLink>
           </li>
-          <li className="flex items-center">
+          {/* <li className="flex items-center">
             <ShoppingCartIcon
               onClick={context.openCheckoutSideMenu}
               className="h-6 w-6 cursor-pointer text-gray-300"
             />
             <div>{context.cartProducts.length}</div>
-          </li>
+          </li> */}
         </>
       );
     }
@@ -134,7 +135,12 @@ const Navbar = () => {
         </li>
       </ul>
 
-      <ul className="flex items-center gap-3 text-base">{renderView()}</ul>
+      <ul className="flex items-center gap-3 text-base">
+        {renderView()}
+        <li className="flex items-center">
+          <ShoppingCart />
+        </li>
+      </ul>
     </nav>
   );
 };
