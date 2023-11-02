@@ -7,6 +7,8 @@ import ShoppingCart from "../ShoppingCart";
 const Navbar = () => {
   const context = useContext(ShoppingCartContext);
   const activeStyle = "bg-slate-700 rounded-lg p-1";
+  const account = localStorage.getItem("account");
+  const parsedAccount = JSON.parse(account);
 
   //sign Out
   const signOut = localStorage.getItem("sign-out");
@@ -35,7 +37,7 @@ const Navbar = () => {
     } else {
       return (
         <>
-          <li className="text-gray-400 text-sm">Bienvenid@ Adrian German</li>
+          <li className="text-gray-400 text-sm">{parsedAccount?.email}</li>
           <li>
             <NavLink
               to="/my-orders"
