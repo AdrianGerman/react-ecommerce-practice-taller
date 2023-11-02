@@ -22,8 +22,7 @@ const Card = (data) => {
   };
 
   const renderIcon = (id) => {
-    const isInCart =
-      context.cartProducts.filter((product) => product.id === id).length > 0;
+    const isInCart = context.cartProducts.filter((product) => product.id === id).length > 0;
 
     if (isInCart) {
       return (
@@ -61,7 +60,7 @@ const Card = (data) => {
         />
         {renderIcon(data.data.id)}
       </figure>
-      <p className="flex justify-between">
+      <p className="flex justify-between items-center">
         <span className="text-sm font-light m-1">{data.data.title}</span>
         <span className="text-lg font-medium">${data.data.price}</span>
       </p>

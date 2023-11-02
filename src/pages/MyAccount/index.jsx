@@ -1,4 +1,3 @@
-import { Link, Navigate } from "react-router-dom";
 import Layout from "../../components/Layout";
 import { useContext, useState, useRef } from "react";
 import { ShoppingCartContext } from "../../context";
